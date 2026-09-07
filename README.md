@@ -13,16 +13,47 @@
 
 ## Установка
 
-<!-- Опишите установку: клонирование, зависимости, переменные окружения -->
+Требуется Python 3.13+ и [uv](https://docs.astral.sh/uv/).
 
 ```bash
 git clone https://github.com/mikitasazan/python-project-50.git
 cd python-project-50
+make install
+make build && make package-install   # установить утилиту gendiff в систему
 ```
 
 ## Использование
 
-<!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
+```bash
+gendiff file1.json file2.json                      # формат stylish (по умолчанию)
+gendiff --format plain file1.yml file2.yml         # плоский формат
+gendiff --format json file1.json file2.json        # машиночитаемый вывод
+gendiff --help
+```
+
+Утилита сравнивает два файла конфигурации (JSON или YAML), в том числе вложенные,
+и печатает отличия: `-` удалено, `+` добавлено, отсутствие знака — не изменилось.
+
+Пример вывода в формате `stylish`:
+
+```
+{
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+    }
+}
+```
+
+### Разработка
+
+```bash
+make lint            # ruff
+make test            # pytest
+make test-coverage   # pytest с отчётом покрытия (порог 80%)
+make check           # линтер и тесты вместе
+```
 
 ---
 
